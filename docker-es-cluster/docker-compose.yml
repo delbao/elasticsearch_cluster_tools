@@ -6,7 +6,6 @@ es:
     - data
   ports: 
     - 9200
-  command: /elasticsearch/bin/elasticsearch -Des.config=/data/config/elasticsearch.yml
 data:
   image: ubuntu 
   volumes:
