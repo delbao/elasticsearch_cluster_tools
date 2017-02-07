@@ -15,5 +15,7 @@ docker-compose scale hrono-elasticsearch-slave=6
 docker-compose scale hrono-elasticsearch-slave=9
 ```
 
-### Cluster state
-[http://localhost:9200/_cluster/state?pretty](http://localhost:9200/_cluster/state?pretty)
+### URL's
+Cluster state: `http://localhost:9200/_cluster/state?pretty`  
+Kibana: `http://localhost:5601/app/kibana`  
+elasticsearch-head: `http://localhost:9100/`

@@ -2,7 +2,7 @@ version: '2'
 services:
   hrono-elasticsearch-master:
     image: elasticsearch:5.2.0
-    command: "elasticsearch -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=true -Enode.data=false"
+    command: "elasticsearch -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=true -Enode.data=false -Ehttp.cors.enabled=true -Ehttp.cors.allow-origin=*"
     environment:
       - ES_JAVA_OPTS=-Xmx3g -Xms3g
     ports:
@@ -23,3 +23,10 @@ services:
       - "5601:5601"
     links:
       - hrono-elasticsearch-master:elasticsearch
+
+  hrono-elasticsearch-head:
+    image: mobz/elasticsearch-head:5
+    ports:
+      - "9100:9100"
+    links:
+      - hrono-elasticsearch-master
