@@ -1,0 +1,25 @@
+version: '2'
+services:
+  hrono-elasticsearch-master:
+    image: elasticsearch:5.2.0
+    command: "elasticsearch -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=true -Enode.data=false"
+    environment:
+      - ES_JAVA_OPTS=-Xmx3g -Xms3g
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+  hrono-elasticsearch-slave:
+    image: elasticsearch:5.2.0
+    command: "elasticsearch -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master"
+    environment:
+      - ES_JAVA_OPTS=-Xmx3g -Xms3g
+    links:
+      - hrono-elasticsearch-master
+
+  hrono-kibana:
+    image: kibana:5.2.0
+    ports:
+      - "5601:5601"
+    links:
+      - hrono-elasticsearch-master:elasticsearch
