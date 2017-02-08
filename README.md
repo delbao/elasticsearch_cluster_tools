@@ -1,4 +1,4 @@
-### Prerequisite
+# Prerequisite
 Docker [how-to install](https://docs.docker.com/engine/installation/)  
 Docker Compose [how-to install](https://docs.docker.com/compose/install/)
 
