@@ -3,8 +3,8 @@ services:
   hrono-elasticsearch-master:
     image: elasticsearch:5.2.0
     command: "elasticsearch -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=true -Enode.data=false -Ehttp.cors.enabled=true -Ehttp.cors.allow-origin=*"
-#    environment:
-#      - ES_JAVA_OPTS=-Xmx3g -Xms3g
+    environment:
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -15,8 +15,8 @@ services:
   hrono-elasticsearch-slave:
     image: elasticsearch:5.2.0
     command: "elasticsearch -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master"
-#    environment:
-#      - ES_JAVA_OPTS=-Xmx3g -Xms3g
+    environment:
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g
     links:
       - hrono-elasticsearch-master
     privileged: true
