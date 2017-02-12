@@ -1,0 +1,15 @@
+es:
+  image: elasticsearch:1.4.4
+  volumes:
+    - ./config:/data/config
+  volumes_from:
+    - data
+  ports: 
+    - 9200
+data:
+  image: ubuntu 
+  volumes:
+    - /data/logs
+    - /data/data
+    - /data/plugins
+  command: /bin/bash
