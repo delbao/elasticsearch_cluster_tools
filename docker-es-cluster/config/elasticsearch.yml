@@ -1,6 +1,15 @@
+network:
+  host: _site_
+
+http:
+  cors:
+    enabled: true
+    allow-origin: "*"
+
 path:
   logs: /data/logs
   data: /data/data
   plugins: /data/plugins
+
 cluster:
-  name: es-cluster
+  name: dbao-es-cluster

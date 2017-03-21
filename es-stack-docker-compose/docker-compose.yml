@@ -1,8 +1,8 @@
-version: '2.1'
+version: '2.0'
 services:
-  hrono-elasticsearch-master:
+  dbao-elasticsearch-master:
     image: elasticsearch:5.2.0
-    command: "elasticsearch -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=true -Enode.data=false -Ehttp.cors.enabled=true -Ehttp.cors.allow-origin=*"
+    command: "elasticsearch -Enode.master=true -Enode.data=false"
     environment:
       - ES_JAVA_OPTS=-Xmx1g -Xms1g
     ports:
@@ -12,27 +12,28 @@ services:
 #    sysctls:
 #      - vm.max_map_count=262144
 
-  hrono-elasticsearch-slave:
+  dbao-elasticsearch-slave:
     image: elasticsearch:5.2.0
-    command: "elasticsearch -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master"
+    command: "elasticsearch -Ediscovery.zen.ping.unicast.hosts=dbao-elasticsearch-master"
     environment:
       - ES_JAVA_OPTS=-Xmx1g -Xms1g
     links:
-      - hrono-elasticsearch-master
+      - dbao-elasticsearch-master
     privileged: true
+
 #    sysctls:
 #      - vm.max_map_count=262144
 
-  hrono-kibana:
+  dbao-kibana:
     image: kibana:5.2.0
     ports:
       - "5601:5601"
     links:
-      - hrono-elasticsearch-master:elasticsearch
+      - dbao-elasticsearch-master:elasticsearch
 
-  hrono-elasticsearch-head:
+  dbao-elasticsearch-head:
     image: mobz/elasticsearch-head:5
     ports:
       - "9100:9100"
     links:
-      - hrono-elasticsearch-master
+      - dbao-elasticsearch-master
